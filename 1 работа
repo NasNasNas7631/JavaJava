@@ -1,4 +1,6 @@
+import java.io.FileOutputStream;
 import java.sql.*;
+import org.apache.poi.hssf.usermodel.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +8,40 @@ public class Main {
 
             // Подключение к базе данных
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/newdb", "root", "123456789");
+
+            // Создание нового документа Excel
+            Workbook workbook = WorkbookFactory.create(true);
+
+            // Создание нового листа
+            Sheet sheet = workbook.createSheet("Данные");
+
+            // Получение данных из базы данных
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM таблица");
+
+            int rowNum = 0;
+
+            // Запись данных в лист
+            while (resultSet.next()) {
+                Row row = sheet.createRow(rowNum++);
+
+                // Запись значений в ячейки строки
+                row.createCell(0).setCellValue(resultSet.getInt("id"));
+                row.createCell(1).setCellValue(resultSet.getString("name"));
+            }
+
+            // Закрытие соединения
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+            // Сохранение документа в файл
+            FileOutputStream fileOut = new FileOutputStream("data.xlsx");
+            workbook.write(fileOut);
+            fileOut.close();
+
+            // Вывод сообщения о успешном сохранении
+            System.out.println("Данные успешно сохранены в файл data.xlsx");
 
             // Получение метаданных о таблицах
             DatabaseMetaData metaData = connection.getMetaData();
@@ -27,7 +63,7 @@ public class Main {
             int mul = a*b;
             int div = b/a;
             int divno = a%b;
-            int abs = (int)(Math.abs(a));
+            int abs = (Math.abs(a));
             int pow = (int)(Math.pow(a,b));
 
 
@@ -61,7 +97,13 @@ public class Main {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            // Закрытие документа
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-}//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+}
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
