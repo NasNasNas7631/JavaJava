@@ -1,3 +1,5 @@
+package JavaJava;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,7 +9,7 @@ import java.sql.Statement;
 
 
 public class DBhandler {
-    private static final String URL = "jdbc:mysql://localhost:3306/newdb";
+    private static final String URL = "jdbc:mysql://localhost:3306/test";
     private static final String USER = "root";
     private static final String PASSWORD = "123456789";
     private static String tableName = "string_db";
@@ -99,7 +101,7 @@ public class DBhandler {
     }
 
     public static void insertStringToString(String strSTS){
-        System.out.println("Результат реверсирования строк : " + strSTS);
+        System.out.println("Результат объединения строк : " + strSTS);
         String query = "UPDATE " + tableName + " SET  string_to_string = '" + strSTS + "'ORDER BY id DESC LIMIT 1;";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.executeUpdate();

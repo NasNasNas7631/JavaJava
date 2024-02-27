@@ -1,9 +1,10 @@
+package JavaJava;
+
 import java.util.Scanner;
 
 public class StringOperations {
     public static void inputStrings(Scanner scanner) {
         System.out.println("Введите первую строку: ");
-        // scanner.next();
         String str1 = scanner.nextLine();
         System.out.println("Введите вторую строку: ");
         String str2 = scanner.nextLine();
@@ -18,9 +19,13 @@ public class StringOperations {
     public static void StringReverse()
     {
         StringBuffer str1 = new StringBuffer();
+        StringBuffer str2 = new StringBuffer();
         str1.append(DBhandler.getStrFromDB(1));
         str1.reverse();
+        str2.append(DBhandler.getStrFromDB(2));
+        str2.reverse();
         DBhandler.insertStrReverse(String.valueOf(str1));
+        DBhandler.insertStrReverse(String.valueOf(str2));
     }
 
     public static void StringToString()

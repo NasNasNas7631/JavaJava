@@ -1,3 +1,5 @@
+package JavaJava;
+
 import java.util.Scanner;
 
 
@@ -11,7 +13,7 @@ public class Main {
                     1. Вывести все таблицы из MySQL.
                     2. Создать таблицу в MySQL.
                     3. Ввести 2 строки
-                    4. Изменить порядок символов в первой строке на обратный
+                    4. Изменить порядок символов в строке на обратный
                     5. Объединить две строки в единое целое, результат сохранить в MySQL с последующим выводом
                     в консоль.
                     6. Сохранить все данные (вышеполученные результаты) из MySQL в Excel и вывести на экран 
@@ -42,6 +44,7 @@ public class Main {
                 break;
             case 5:
                 StringOperations.StringToString();
+                break;
             case 6:
                 ExcelExporter exporter = new ExcelExporter();
                 exporter.export();
